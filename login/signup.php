@@ -11,31 +11,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation
     if ($email !== $confirmEmail || $password !== $confirmPassword) {
-        header("Location: landing.html?error=Email or password do not match");
-        exit;
-    }
-
-    if (!$first || !$last || !$email || !$password) {
-        header("Location: landing.html?error=All fields are required");
-        exit;
-    }
-
-    try {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        if ($stmt->fetch()) {
-            header("Location: landing.html?error=Email already registered");
-            exit;
+        $error = "Email or password do not match";
+    } elseif (!$first || !$last || !$email || !$password) {
+        $error = "All fields are required";
+    } else {
+        // Password complexity check
+        $passwordPattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{15,}$/';
+        if (!preg_match($passwordPattern, $password)) {
+            $error = "Password must be at least 15 characters with upper and lower case letters, a number, and a special character.";
+        } else {
+            try {
+                $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+                $stmt->execute([$email]);
+                if ($stmt->fetch()) {
+                    $error = "Email already registered";
+                } else {
+                    $hashed = password_hash($password, PASSWORD_DEFAULT);
+                    $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
+                    $stmt->execute([$first, $last, $email, $hashed]);
+                    header("Location: landing.html?success=Account created. Please login.");
+                    exit;
+                }
+            } catch (PDOException $e) {
+                $error = "Signup failed. Please try again.";
+            }
         }
-
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$first, $last, $email, $hashed]);
-
-        header("Location: landing.html?success=Account created. Please login.");
-        exit;
-    } catch (PDOException $e) {
-        header("Location: landing.html?error=Signup failed");
-        exit;
     }
 }
