@@ -1,160 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>User Profile - Combatives Hub</title>
-  <link rel="stylesheet" href="profile.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile - Combatives Hub</title>
+    <link rel="stylesheet" href="profile.css" />
 </head>
 <body>
 
-  <main class="profile-container">
-    <h1>Complete Your Profile</h1>
+    <main class="profile-container">
+        <h1>Complete Your Profile</h1>
 
-<form class="profile-form" action="/profile/profile_save.php" method="POST">
+        <form class="profile-form" action="/profile/profile_save.php" method="POST" enctype="multipart/form-data">
 
-      <!-- Prefilled Fields    -->
-      <div class="form-group">
-        <label for="first-name">First Name</label>
-        <input type="text" id="first-name" name="first_name" placeholder="John" />
-      </div>
+            <!-- Prefilled Fields -->
+            <div class="form-group">
+                <label for="first-name">First Name *</label>
+                <input type="text" id="first-name" name="first_name" placeholder="John" required />
+            </div>
 
-      <div class="form-group">
-        <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" name="last_name" placeholder="Doe" />
-      </div>
+            <div class="form-group">
+                <label for="last-name">Last Name *</label>
+                <input type="text" id="last-name" name="last_name" placeholder="Doe" required />
+            </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="personal or .mil" />
-      </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="personal or .mil" required />
+            </div>
 
-      <!-- Custom Fields -->
+            <!-- Profile Photo -->
+            <div class="form-group">
+                <label for="profile-pic">Profile Photo</label>
+                <input type="file" id="profile-pic" name="profile_pic" accept="image/*" />
+            </div>
 
-      <!--profile pic-->
-      <div class="form-group">
-        <label for="profile-pic">Profile Photo</label>
-        <input type="file" id="profile-pic" accept="image/*" />
-      </div>
+            <!-- Nickname -->
+            <div class="form-group">
+                <label for="nickname">Nickname / Display Name</label>
+                <input type="text" id="nickname" name="nickname" placeholder="e.g., IronFist" />
+            </div>
 
-      <!--username-->
-      <div class="form-group">
-        <label for="nickname">Nickname / Display Name</label>
-        <input type="text" id="nickname" name="nickname" placeholder="e.g., IronFist" />
-      </div>
+            <!-- Military Installation (multi-select) -->
+            <div class="form-group">
+                <label for="installations">Military Installation(s)</label>
+                <select id="installations" name="installations[]" multiple size="6">
+                    <option value="Fort Bragg">Fort Bragg</option>
+                    <option value="Fort Campbell">Fort Campbell</option>
+                    <option value="Fort Hood">Fort Hood</option>
+                    <option value="Fort Benning">Fort Benning</option>
+                    <option value="Fort Carson">Fort Carson</option>
+                    <option value="Fort Drum">Fort Drum</option>
+                    <option value="Fort Stewart">Fort Stewart</option>
+                    <option value="Fort Bliss">Fort Bliss</option>
+                    <option value="Fort Sill">Fort Sill</option>
+                    <option value="Fort Polk">Fort Polk</option>
+                    <option value="Fort Gordon">Fort Gordon</option>
+                    <option value="Fort Riley">Fort Riley</option>
+                    <option value="Fort Leonard Wood">Fort Leonard Wood</option>
+                    <option value="Fort Knox">Fort Knox</option>
+                    <option value="Fort Jackson">Fort Jackson</option>
+                    <option value="HAAF">HAAF</option>
+                    <option value="Eglin AFB">Eglin AFB</option>
+                    <option value="Joint Base Lewis-McChord">JBLM</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
 
+            <!-- Combatives Certification Level -->
+            <div class="form-group">
+                <label for="level">Combatives Certification Level *</label>
+                <select id="level" name="level" required>
+                    <option value="">Select level</option>
+                    <option value="Level 1 (BCC)">Level 1 (BCC)</option>
+                    <option value="Level 2 (TCC)">Level 2 (TCC)</option>
+                    <option value="Level 3 (CMTC)">Level 3 (CMTC)</option>
+                </select>
+            </div>
 
-      <div class="form-group">
-        <label for="installations">Military Installation</label>
-        <select id="installations" name="installations[]" multiple>
-          <option value="Fort Bragg">Fort Bragg</option>
-          <option value="Fort Campbell">Fort Campbell</option>
-          <option value="Fort Hood">Fort Hood</option>
-          <option value="Fort Benning">Fort Benning</option>
-          <option value="Fort Carson">Fort Carson</option>
-          <option value="Fort Drum">Fort Drum</option>
-          <option value="Fort Stewart">Fort Stewart</option>
-          <option value="Fort Bliss">Fort Bliss</option>
-          <option value="Fort Sill">Fort Sill</option>
-          <option value="Fort Polk">Fort Polk</option>
-          <option value="Fort Gordon">Fort Gordon</option>
-          <option value="Fort Riley">Fort Riley</option>
-          <option value="Fort Leonard Wood">Fort Leonard Wood</option>
-          <option value="Fort Knox">Fort Knox</option>
-          <option value="Fort Jackson">Fort Jackson</option>
-          <option value="HAAF">HAAF</option>
-          <option value="Eglin AFB">Eglin AFB</option>
-          <option value="Joint Base Lewis-McChord"> JBLM</optionJoint></option>
-          <option value="Other"></optionOther>Other</option>
-        </select>
-      </div>
+            <!-- User Role -->
+            <div class="form-group">
+                <label for="user-role">Role *</label>
+                <select id="user-role" name="user_role" required>
+                    <option value="">Select role</option>
+                    <option value="student">Student</option>
+                    <option value="instructor">Instructor</option>
+                    <option value="manager">Program Manager</option>
+                </select>
+            </div>
 
-      <div class="form-group">
-        <label for="level">Combatives Certification Level</label>
-        <select id="level" name="level">
-          <option value="">Select level</option>
-          <option>Level 1 (BCC)</option>
-          <option>Level 2 (TCC)</option>
-          <option>Level 3 (CMTC)</option>
-        </select>
-      </div>
+            <button type="submit">Continue to Dashboard</button>
+        </form>
+    </main>
 
+    <script>
+        document.querySelector('.profile-form').addEventListener('submit', function (e) {
+            const requiredFields = ['first-name', 'last-name', 'email', 'level', 'user-role'];
+            let hasError = false;
 
-      <!--
-      <div class="form-group">
-        <label for="color">Jiu Jitu belt</label>
-        <select id="color" name="color">
-            <option value="">Select color</option>
-            <option>White</option>
-            <option>White + 1 stripe</option>
-            <option>White + 2 stripes</option>
-            <option>White + 3 stripes</option>
-            <option>White + 4 stripes</option>
-            <option>Blue</option>
-            <option>Blue + 1 stripe</option>
-            <option>Blue + 2 stripes</option>
-            <option>Blue + 3 stripes</option>
-            <option>Blue + 4 stripes</option>
-            <option>Purple</option>
-            <option>Purple + 1 stripe</option>
-            <option>Purple + 2 stripes</option>
-            <option>Purple + 3 stripes</option>
-            <option>Purple + 4 stripes</option>
-            <option>Brown</option>
-            <option>Brown + 1 stripe</option>  
-            <option>Brown + 2 stripes</option>
-            <option>Brown + 3 stripes</option>
-            <option>Brown + 4 stripes</option>
-            <option>Black</option>
-            <option>Black 1st degree</option>
-            <option>Black 2nd degree</option> 
-            <option>Black 3rd degree</option>
-            <option>Black 4th or higher</option>
-          
+            requiredFields.forEach(id => {
+                const field = document.getElementById(id);
+                if (!field.value.trim()) {
+                    field.style.border = '2px solid red';
+                    hasError = true;
+                } else {
+                    field.style.border = '';
+                }
+            });
 
-        </select>
-      </div>
-                   -->
-
-      <!--user role, important for dashboard ui selection-->
-<div class="form-group">
-  <label for="user-role">Role</label>
-  <select id="user-role" name="user_role">
-    <option value="">Select level</option>
-    <option value="student">Student</option>
-    <option value="instructor">Instructor</option>
-    <option value="manager">Program Manager</option>
-  </select>
-</div>
-
-
-      <button type="submit">Continue to Dashboard</button>
-    </form>
-  </main>
-
-<script>
-document.querySelector('.profile-form').addEventListener('submit', function (e) {
-  const requiredFields = ['first-name', 'last-name', 'email', 'level', 'user-role'];
-  let hasError = false;
-
-  requiredFields.forEach(id => {
-    const field = document.getElementById(id);
-    if (!field.value.trim()) {
-      field.style.border = '2px solid red';
-      hasError = true;
-    } else {
-      field.style.border = '';
-    }
-  });
-
-  if (hasError) {
-    e.preventDefault();
-    alert("Please fill out all required fields to complete your profile.");
-  }
-});
-</script>
-
-
+            if (hasError) {
+                e.preventDefault();
+                alert("Please fill out all required fields to complete your profile.");
+            }
+        });
+    </script>
 
 </body>
 </html>

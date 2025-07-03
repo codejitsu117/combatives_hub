@@ -1,159 +1,222 @@
-/* Base Styles */
+/*============================
+  ROOT VARIABLES
+============================*/
+:root {
+    --gold: #FFD700;
+    --black: #000;
+    --dark-gray: #111;
+    --mid-gray: #222;
+    --light-gray: #666;
+    --error-red: #b30000;
+    --error-bg: #ffe6e6;
+    --hover-gold: #d4af00;
+}
+
+
+/*============================
+  BASE STYLES
+============================*/
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #000;
-  color: #FFD700; /* Army combatives gold */
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--black);
+    color: var(--gold);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 
-
-/*image*/
+/*============================
+  LOGO IMAGE
+============================*/
 .hero-logo {
-  display: block;
-  margin: 0 auto 1.5rem auto;
-  width: 180px;
-  max-width: 120%;
-   filter: drop-shadow(0 0 8px rgba(255, 217, 0, 0.462));
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    width: 180px;
+    max-width: 120%;
+    filter: drop-shadow(0 0 8px rgba(255, 217, 0, 0.462));
 }
 
 
-
-/* Center main content */
+/*============================
+  MAIN CONTENT
+============================*/
 main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  padding-top: 60px; /* Adjusted for header height */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    padding-top: 60px;
 }
 
 
-/* New centering wrapper */
+/*============================
+  AUTH WRAPPER
+============================*/
 #auth-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding-top: 0.5rem;
-  margin-top: 0;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 420px;
 }
 
-/* Headings and text */
+
+/*============================
+  TYPOGRAPHY
+============================*/
 h1, h2 {
-  text-align: center;
-  color: #FFD700;
-  margin-bottom: 1rem;
+    text-align: center;
+    color: var(--gold);
+    margin-bottom: 1rem;
 }
 
 label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #FFD700;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
 }
 
+
+/*============================
+  FORM INPUTS
+============================*/
 input {
-  width: 90%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: none;
-  border-radius: 8px;
-  background-color: #222;
-  color: #FFD700;
+    width: 90%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--mid-gray);
+    color: var(--gold);
+    transition: background-color 0.3s ease, border 0.3s ease;
 }
 
+    input:focus {
+        outline: 2px solid var(--gold);
+        background-color: #333;
+    }
+
+
+/*============================
+  ERROR MESSAGE BOX
+============================*/
 .error-box {
-  color: #b30000;           /* Deep red for error text */
-  background-color: #ffe6e6; /* Soft red background */
-  border: 1px solid #b30000;
-  border-radius: 5px;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  font-size: 14px;
+    color: var(--error-red);
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-red);
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 
-/* Buttons */
+/*============================
+  BUTTONS
+============================*/
 button {
-  width: 100%;
-  padding: 0.75rem;
-  margin: auto auto;
-  background-color: #FFD700;
-  color: #000;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    width: 100%;
+    padding: 0.75rem;
+    margin: auto auto;
+    background-color: var(--gold);
+    color: var(--black);
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #e6c200;
-}
+    button:hover {
+        background-color: var(--hover-gold);
+    }
 
-/* Footer */
+
+/*============================
+  FOOTER
+============================*/
 footer {
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: #666;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: var(--light-gray);
 }
 
-/* Responsive Layout */
-@media (min-width: 768px) {
-  #auth-forms {
-    flex-direction: row;
-    justify-content: space-between;
-  }
 
-  #login-form, #signup-form {
-    width: 48%;
-  }
-}
-
-.auth-panel {
-  background-color: #111;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-  max-width: 400px;
-  width: 75%;
-  margin: 0 auto;
-}
-
+/*============================
+  TOGGLE LINKS
+============================*/
 .toggle-link {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
 }
 
-.toggle-link a {
-  color: #FFD700;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.hidden {
-  display: none;
-}
+    .toggle-link a {
+        color: var(--gold);
+        text-decoration: underline;
+        cursor: pointer;
+    }
 
 .signup:hover,
 .signup:focus,
-.signup:active {
-  color: #4b462b ;
-}
-
+.signup:active,
 .login:hover,
 .login:focus,
 .login:active {
-  color: #4b462b ;
-  margin: auto auto;
+    color: #4b462b;
+}
+
+
+/*============================
+  AUTH PANEL BOXES
+============================*/
+.auth-panel {
+    background-color: var(--dark-gray);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+    max-width: 400px;
+    width: 75%;
+    margin: 0 auto;
+}
+
+
+/*============================
+  RESPONSIVE LAYOUT
+============================*/
+@media (min-width: 768px) {
+    #auth-forms {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #login-form, #signup-form {
+        width: 48%;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-panel {
+        padding: 1.2rem;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+
+
+/*============================
+  UTILITIES
+============================*/
+.hidden {
+    display: none;
 }

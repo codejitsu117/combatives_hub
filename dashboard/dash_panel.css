@@ -1,70 +1,73 @@
 /* Sidebar Panel */
 .sidebar-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 100%;
-  background-color: #111111d2;
-  color: #FFD700;
-  padding: 1rem;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.6);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(17, 17, 17, 0.95);
+    color: #FFD700;
+    padding: 1rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.6);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
 }
 
-.sidebar-panel.show {
-  transform: translateX(0);
-}
+    .sidebar-panel.show {
+        transform: translateX(0);
+    }
 
 .sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
 .sidebar-close {
-  cursor: pointer;
-  font-size: 1.5rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #FFD700;
+    background: none;
+    border: none;
 }
 
 .sidebar-links {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
-.sidebar-links li {
-  margin-bottom: 1rem;
-}
+    .sidebar-links li {
+        margin-bottom: 1rem;
+    }
 
-.sidebar-links a {
-  color: #FFD700;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem;
-  display: block;
-  border-radius: 6px;
-  background-color: 0.2s ease;
-}
+    .sidebar-links a {
+        color: #FFD700;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.5rem;
+        display: block;
+        border-radius: 6px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
 
-.sidebar-links a:hover {
-  background-color: #FFD700;
-  color: #000;
-}
+        .sidebar-links a:hover {
+            background-color: #FFD700;
+            color: #000;
+        }
 
 /* Overlay */
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.6);
-  z-index: 900;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 900;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }

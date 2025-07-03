@@ -1,106 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Army Combatives Hub</title>
-  <link rel="stylesheet" href="master.css">
-</head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Army Combatives Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #FFD700;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
 
+        header {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        #auth-wrapper {
+            background: #222;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .auth-panel {
+            margin-top: 1rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: bold;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 6px;
+            background: #333;
+            color: #FFD700;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.7rem;
+            background-color: #FFD700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #000;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #e6c200;
+            }
+
+        .toggle-link {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+            .toggle-link a {
+                color: #FFD700;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+
+        .error-box, .success-box {
+            padding: 12px;
+            margin-bottom: 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .error-box {
+            background-color: #ffcccc;
+            color: #b00020;
+            border: 1px solid #b00020;
+        }
+
+        .success-box {
+            background-color: #e6ffea;
+            color: #2f7a2f;
+            border: 1px solid #2f7a2f;
+        }
+        /* Password complexity feedback */
+        #password-feedback {
+            font-size: 0.9rem;
+            margin-top: -0.8rem;
+            margin-bottom: 1rem;
+            color: #f0a500;
+        }
+
+            #password-feedback.valid {
+                color: #2f7a2f;
+            }
+    </style>
+</head>
 <body>
 
-  <header>
-    <h1>Combatives Hub</h1>
-   <!-- <p>Empowering Soldiers Through Discipline, Skill, and Resilience</p> -->
-    
+    <header>
+        <h1>Combatives Hub</h1>
+    </header>
 
-  </header>
+    <section id="auth-wrapper">
 
-  <main>
+        <img src="../media/macp_logo.png" alt="Combatives Logo" class="hero-logo" style="display:block; margin: 0 auto 1.5rem; max-width: 180px;" />
 
-    
+        <!-- Display error/success messages -->
+        <div id="messages"></div>
 
-  <section id="auth-wrapper">
+        <div id="login-form" class="auth-panel">
+            <h2>Login</h2>
 
-  <img src="../media/macp_logo.png" alt="Combatives Logo" class="hero-logo" />
+            <form action="login.php" method="POST" autocomplete="off">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="email" required autocomplete="email" />
 
-  <div id="login-form" class="auth-panel">
-    <h2>Login</h2>
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" required autocomplete="current-password" />
 
+                <button type="submit">Login</button>
+            </form>
 
-    <!--error box messages-->
-    <?php if (isset($_GET['error'])): ?>
-  <div class="error-box">
-    <?php echo htmlspecialchars($_GET['error']); ?>
-  </div>
-    <?php endif; ?>
+            <p class="toggle-link">Not a member? <a id="show-signup" href="#">Sign up</a></p>
+        </div>
 
+        <div id="signup-form" class="auth-panel hidden">
+            <h2>Sign Up</h2>
 
-    <form action="login.php" method="POST">
-      <label for="login-email">Email</label>
-      <input type="email" id="login-email" name="email" required>
+            <form action="signup.php" method="POST" autocomplete="off" id="signupForm">
+                <label for="signup-first">First Name</label>
+                <input type="text" id="signup-first" name="first" required />
 
-      <label for="login-password">Password</label>
-      <input type="password" id="login-password" name="password" required>
+                <label for="signup-last">Last Name</label>
+                <input type="text" id="signup-last" name="last" required />
 
-      <button type="submit">Login</button>
-    </form>
-    <p class="toggle-link">Not a member? <a href="#" id="show-signup" class="signup">Sign up</a></p>
-  </div>
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" name="email" required autocomplete="email" />
 
-  <div id="signup-form" class="auth-panel hidden">
-    <h2>Sign Up</h2>
-    <form action="signup.php" method="POST">
-      <label for="signup-first">First Name</label>
-      <input type="text" id="signup-first" name="first" required>
+                <label for="signup-confirm-email">Confirm Email</label>
+                <input type="email" id="signup-confirm-email" name="confirm-email" required autocomplete="email" />
 
-      <label for="signup-last">Last Name</label>
-      <input type="text" id="signup-last" name="last" required>
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" name="password" required autocomplete="new-password" />
+                <div id="password-feedback"></div>
 
-      <label for="signup-email">Email</label>
-      <input type="email" id="signup-email" name="email" required>
+                <label for="signup-confirm-password">Confirm Password</label>
+                <input type="password" id="signup-confirm-password" name="confirm-password" required autocomplete="new-password" />
 
-      <label for="signup-confirm-email">Confirm Email</label>
-      <input type="email" id="signup-confirm-email" name="confirm-email" required>
+                <button type="submit">Create Account</button>
+            </form>
 
-      <label for="signup-password">Password</label>
-      <input type="password" id="signup-password" name="password" required>
+            <p class="toggle-link">Already have an account? <a id="show-login" href="#">Login</a></p>
+        </div>
 
-      <label for="signup-confirm-password">Confirm Password</label>
-      <input type="password" id="signup-confirm-password" name="confirm-password" required>
+    </section>
 
-      <button type="submit">Create Account</button>
-    </form>
-    <p class="toggle-link">Already have an account? <a href="#" id="show-login" class="login">Login</a></p>
-  </div>
-</section>
+    <footer style="margin-top: 3rem; text-align:center; color:#777;">
+        <p>&copy; 2025 Combatives Hub. All rights reserved.</p>
+    </footer>
 
-  </main>
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const showSignup = document.getElementById('show-signup');
+        const showLogin = document.getElementById('show-login');
 
-  <footer>
-    <p>&copy; 2025 Combatives Hub. All rights reserved.</p>
-  </footer>
+        showSignup.addEventListener('click', e => {
+            e.preventDefault();
+            loginForm.classList.add('hidden');
+            signupForm.classList.remove('hidden');
+            clearMessages();
+        });
 
-<script>
-  const loginForm = document.getElementById('login-form');
-  const signupForm = document.getElementById('signup-form');
-  const showSignup = document.getElementById('show-signup');
-  const showLogin = document.getElementById('show-login');
+        showLogin.addEventListener('click', e => {
+            e.preventDefault();
+            signupForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            clearMessages();
+        });
 
-  showSignup.addEventListener('click', (e) => {
-    e.preventDefault();
-    loginForm.classList.add('hidden');
-    signupForm.classList.remove('hidden');
-  });
+        // Display messages from URL params
+        function getParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-  showLogin.addEventListener('click', (e) => {
-    e.preventDefault();
-    signupForm.classList.add('hidden');
-    loginForm.classList.remove('hidden');
-  });
-</script>
+        function clearMessages() {
+            document.getElementById('messages').innerHTML = '';
+        }
 
+        function displayMessage(type, text) {
+            const div = document.createElement('div');
+            div.className = type === 'error' ? 'error-box' : 'success-box';
+            div.textContent = text;
+            document.getElementById('messages').appendChild(div);
+        }
 
+        // Show server messages if exist
+        window.onload = () => {
+            const error = getParam('error');
+            const success = getParam('success');
+            if (error) displayMessage('error', error);
+            if (success) displayMessage('success', success);
+        };
+
+        // Client-side validation for signup confirm email/password
+        const signupFormElement = document.getElementById('signupForm');
+        const emailInput = document.getElementById('signup-email');
+        const confirmEmailInput = document.getElementById('signup-confirm-email');
+        const passwordInput = document.getElementById('signup-password');
+        const confirmPasswordInput = document.getElementById('signup-confirm-password');
+        const passwordFeedback = document.getElementById('password-feedback');
+
+        // Password complexity regex
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{15,}$/;
+
+        // Live password complexity feedback
+        passwordInput.addEventListener('input', () => {
+            if (passwordPattern.test(passwordInput.value)) {
+                passwordFeedback.textContent = "Strong password ✓";
+                passwordFeedback.classList.add('valid');
+            } else {
+                passwordFeedback.textContent = "Password must be at least 15 characters, include uppercase, lowercase, number, and special character";
+                passwordFeedback.classList.remove('valid');
+            }
+        });
+
+        signupFormElement.addEventListener('submit', (e) => {
+            clearMessages();
+
+            if (emailInput.value !== confirmEmailInput.value) {
+                e.preventDefault();
+                displayMessage('error', "Emails do not match.");
+                confirmEmailInput.focus();
+                return;
+            }
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                e.preventDefault();
+                displayMessage('error', "Passwords do not match.");
+                confirmPasswordInput.focus();
+                return;
+            }
+
+            if (!passwordPattern.test(passwordInput.value)) {
+                e.preventDefault();
+                displayMessage('error', "Password does not meet complexity requirements.");
+                passwordInput.focus();
+                return;
+            }
+        });
+    </script>
 
 </body>
 </html>
