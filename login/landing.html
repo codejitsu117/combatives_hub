@@ -1,106 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Army Combatives Hub</title>
-  <link rel="stylesheet" href="master.css">
+  <link rel="stylesheet" href="master.css" />
+  <style>
+    #password-requirements ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 5px 0 10px;
+      font-size: 0.9em;
+    }
+
+    #password-requirements li.invalid {
+      color: red;
+    }
+
+    #password-requirements li.valid {
+      color: green;
+    }
+
+    .error-box {
+      background-color: #ffdddd;
+      color: #b30000;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid red;
+      border-radius: 5px;
+    }
+
+    .auth-panel input {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 12px;
+      box-sizing: border-box;
+    }
+
+    .auth-panel button {
+      padding: 10px 15px;
+      font-size: 1rem;
+      background-color: #003366;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .auth-panel button:hover {
+      background-color: #005599;
+    }
+
+    .toggle-link {
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-
   <header>
     <h1>Combatives Hub</h1>
-   <!-- <p>Empowering Soldiers Through Discipline, Skill, and Resilience</p> -->
-    
-
+    <!-- <p>Empowering Soldiers Through Discipline, Skill, and Resilience</p> -->
   </header>
 
   <main>
+    <section id="auth-wrapper">
+      <img src="../media/macp_logo.png" alt="Combatives Logo" class="hero-logo" />
 
-    
+      <div id="login-form" class="auth-panel">
+        <h2>Login</h2>
 
-  <section id="auth-wrapper">
+        <?php if (isset($_GET['error'])): ?>
+          <div class="error-box">
+            <?php echo htmlspecialchars($_GET['error']); ?>
+          </div>
+        <?php endif; ?>
 
-  <img src="../media/macp_logo.png" alt="Combatives Logo" class="hero-logo" />
+        <form action="login.php" method="POST">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="email" required />
 
-  <div id="login-form" class="auth-panel">
-    <h2>Login</h2>
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" required />
 
+          <button type="submit">Login</button>
+        </form>
+        <p class="toggle-link">Not a member? <a href="#" id="show-signup" class="signup">Sign up</a></p>
+      </div>
 
-    <!--error box messages-->
-    <?php if (isset($_GET['error'])): ?>
-  <div class="error-box">
-    <?php echo htmlspecialchars($_GET['error']); ?>
-  </div>
-    <?php endif; ?>
+      <div id="signup-form" class="auth-panel hidden">
+        <h2>Sign Up</h2>
 
+        <form action="signup.php" method="POST">
+          <label for="signup-first">First Name</label>
+          <input type="text" id="signup-first" name="first" required />
 
-    <form action="login.php" method="POST">
-      <label for="login-email">Email</label>
-      <input type="email" id="login-email" name="email" required>
+          <label for="signup-last">Last Name</label>
+          <input type="text" id="signup-last" name="last" required />
 
-      <label for="login-password">Password</label>
-      <input type="password" id="login-password" name="password" required>
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" name="email" required />
 
-      <button type="submit">Login</button>
-    </form>
-    <p class="toggle-link">Not a member? <a href="#" id="show-signup" class="signup">Sign up</a></p>
-  </div>
+          <label for="signup-confirm-email">Confirm Email</label>
+          <input type="email" id="signup-confirm-email" name="confirm-email" required />
 
-  <div id="signup-form" class="auth-panel hidden">
-    <h2>Sign Up</h2>
-    <form action="signup.php" method="POST">
-      <label for="signup-first">First Name</label>
-      <input type="text" id="signup-first" name="first" required>
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" name="password" required />
 
-      <label for="signup-last">Last Name</label>
-      <input type="text" id="signup-last" name="last" required>
+          <div id="password-requirements">
+            <p>Password must contain:</p>
+            <ul>
+              <li id="length" class="invalid">✔ At least 15 characters</li>
+              <li id="uppercase" class="invalid">✔ An uppercase letter</li>
+              <li id="lowercase" class="invalid">✔ A lowercase letter</li>
+              <li id="number" class="invalid">✔ A number</li>
+              <li id="special" class="invalid">✔ A special character</li>
+            </ul>
+          </div>
 
-      <label for="signup-email">Email</label>
-      <input type="email" id="signup-email" name="email" required>
+          <label for="signup-confirm-password">Confirm Password</label>
+          <input type="password" id="signup-confirm-password" name="confirm-password" required />
 
-      <label for="signup-confirm-email">Confirm Email</label>
-      <input type="email" id="signup-confirm-email" name="confirm-email" required>
-
-      <label for="signup-password">Password</label>
-      <input type="password" id="signup-password" name="password" required>
-
-      <label for="signup-confirm-password">Confirm Password</label>
-      <input type="password" id="signup-confirm-password" name="confirm-password" required>
-
-      <button type="submit">Create Account</button>
-    </form>
-    <p class="toggle-link">Already have an account? <a href="#" id="show-login" class="login">Login</a></p>
-  </div>
-</section>
-
+          <button type="submit">Create Account</button>
+        </form>
+        <p class="toggle-link">Already have an account? <a href="#" id="show-login" class="login">Login</a></p>
+      </div>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Combatives Hub. All rights reserved.</p>
   </footer>
 
-<script>
-  const loginForm = document.getElementById('login-form');
-  const signupForm = document.getElementById('signup-form');
-  const showSignup = document.getElementById('show-signup');
-  const showLogin = document.getElementById('show-login');
+  <script>
+    // Toggle login/signup views
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const showSignup = document.getElementById('show-signup');
+    const showLogin = document.getElementById('show-login');
 
-  showSignup.addEventListener('click', (e) => {
-    e.preventDefault();
-    loginForm.classList.add('hidden');
-    signupForm.classList.remove('hidden');
-  });
+    showSignup.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginForm.classList.add('hidden');
+      signupForm.classList.remove('hidden');
+    });
 
-  showLogin.addEventListener('click', (e) => {
-    e.preventDefault();
-    signupForm.classList.add('hidden');
-    loginForm.classList.remove('hidden');
-  });
-</script>
+    showLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      signupForm.classList.add('hidden');
+      loginForm.classList.remove('hidden');
+    });
 
+    // Live password validation
+    document.getElementById('signup-password').addEventListener('input', function () {
+      const password = this.value;
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumber = /[0-9]/.test(password);
+      const hasSpecialChar = /[\W_]/.test(password);
+      const hasMinLength = password.length >= 15;
 
-
+      document.getElementById('length').className = hasMinLength ? 'valid' : 'invalid';
+      document.getElementById('uppercase').className = hasUpperCase ? 'valid' : 'invalid';
+      document.getElementById('lowercase').className = hasLowerCase ? 'valid' : 'invalid';
+      document.getElementById('number').className = hasNumber ? 'valid' : 'invalid';
+      document.getElementById('special').className = hasSpecialChar ? 'valid' : 'invalid';
+    });
+  </script>
 </body>
 </html>
